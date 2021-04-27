@@ -1,0 +1,678 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api de Atendimento",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/"
+        }
+    ],
+    "paths": {
+        "/clientes/all": {
+            "get": {
+                "tags": [
+                    "/clientes/all"
+                ],
+                "summary": "Lista de clientes",
+                "description": "Mostra lista de clientes",
+                "operationId": "App\\Http\\Controllers\\ClienteController::index",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso!"
+                    }
+                }
+            }
+        },
+        "/clientes/find/{cliente}": {
+            "get": {
+                "tags": [
+                    "/clientes/find/:cliente"
+                ],
+                "summary": "Pega cliente por Id",
+                "description": "Retorna cliente por Id",
+                "operationId": "App\\Http\\Controllers\\ClienteController::show",
+                "parameters": [
+                    {
+                        "name": "cliente",
+                        "in": "path",
+                        "description": "Cliente id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/clientes/create": {
+            "post": {
+                "tags": [
+                    "/cliente/create"
+                ],
+                "summary": "Cria um novo Cliente",
+                "description": "Retorna um novo cliente",
+                "operationId": "App\\Http\\Controllers\\ClienteController::store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/clientes/update/{cliente}": {
+            "put": {
+                "tags": [
+                    "/cliente/update/:cliente"
+                ],
+                "summary": "Atualiza cliente existente",
+                "description": "Retorna cliente atualizado por id",
+                "operationId": "App\\Http\\Controllers\\ClienteController::update",
+                "parameters": [
+                    {
+                        "name": "cliente",
+                        "in": "path",
+                        "description": "Cliente id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Sucesso"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/clientes/{cliente}": {
+            "delete": {
+                "tags": [
+                    "/clientes/:cliente"
+                ],
+                "summary": "Deleta um cliente existente",
+                "description": "Deleta o cliente por Id",
+                "operationId": "App\\Http\\Controllers\\ClienteController::delete",
+                "parameters": [
+                    {
+                        "name": "cliente",
+                        "in": "path",
+                        "description": "Cliente id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/clientes/addServicos/{cliente}": {
+            "post": {
+                "tags": [
+                    "/clientes/addServicos/:cliente"
+                ],
+                "summary": "Adiciona servicos ao cliente",
+                "description": "Adiciona servicos ao cliente",
+                "operationId": "App\\Http\\Controllers\\ClienteController::storeServicos",
+                "parameters": [
+                    {
+                        "name": "cliente",
+                        "in": "path",
+                        "description": "cliente id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "servicos": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/funcionarios/all": {
+            "get": {
+                "tags": [
+                    "/funcionarios/all"
+                ],
+                "summary": "Lista de funcionarioss",
+                "description": "Mostra lista de funcionarioss",
+                "operationId": "App\\Http\\Controllers\\FuncionarioController::index",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso!"
+                    }
+                }
+            }
+        },
+        "/funcionarios/find/{funcionario}": {
+            "get": {
+                "tags": [
+                    "/funcionarios/find/:funcionario"
+                ],
+                "summary": "Pega funcionario por Id",
+                "description": "Retorna funcionario por Id",
+                "operationId": "App\\Http\\Controllers\\FuncionarioController::show",
+                "parameters": [
+                    {
+                        "name": "funcionario",
+                        "in": "path",
+                        "description": "funcionario id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/funcionarios/create": {
+            "post": {
+                "tags": [
+                    "/funcionarios/create"
+                ],
+                "summary": "Cria um novo funcionario",
+                "description": "Retorna um novo funcionario",
+                "operationId": "App\\Http\\Controllers\\FuncionarioController::store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/funcionarios/update/{funcionario}": {
+            "put": {
+                "tags": [
+                    "/funcionarios/update/:funcionario"
+                ],
+                "summary": "Atualiza funcionario existente",
+                "description": "Retorna funcionario atualizado por id",
+                "operationId": "App\\Http\\Controllers\\FuncionarioController::update",
+                "parameters": [
+                    {
+                        "name": "funcionario",
+                        "in": "path",
+                        "description": "funcionario id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "servico_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Sucesso"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/funcionarios/{funcionario}": {
+            "delete": {
+                "tags": [
+                    "/funcionarios/:funcionario"
+                ],
+                "summary": "Deleta um funcionario existente",
+                "description": "Deleta o funcionario por Id",
+                "operationId": "App\\Http\\Controllers\\FuncionarioController::delete",
+                "parameters": [
+                    {
+                        "name": "funcionario",
+                        "in": "path",
+                        "description": "funcionario id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/servicos/all": {
+            "get": {
+                "tags": [
+                    "/servicos/all"
+                ],
+                "summary": "Lista de serviços",
+                "description": "Mostra lista de serviços",
+                "operationId": "App\\Http\\Controllers\\ServicoController::index",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso!"
+                    }
+                }
+            }
+        },
+        "/servicos/find/{servico}": {
+            "get": {
+                "tags": [
+                    "/servicos/find/:servico"
+                ],
+                "summary": "Pega serviço por Id",
+                "description": "Retorna serviço por Id",
+                "operationId": "App\\Http\\Controllers\\ServicoController::show",
+                "parameters": [
+                    {
+                        "name": "servico",
+                        "in": "path",
+                        "description": "servico id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/servicos/create": {
+            "post": {
+                "tags": [
+                    "/servicos/create"
+                ],
+                "summary": "Cria um novo Serviço",
+                "description": "Retorna um novo Serviço",
+                "operationId": "App\\Http\\Controllers\\ServicoController::store",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "qtd_min": {
+                                        "type": "integer"
+                                    },
+                                    "valor": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/servicos/update/{servico}": {
+            "put": {
+                "tags": [
+                    "/servicos/update/:servico"
+                ],
+                "summary": "Atualiza serviço existente",
+                "description": "Retorna serviço atualizado por id",
+                "operationId": "App\\Http\\Controllers\\ServicoController::update",
+                "parameters": [
+                    {
+                        "name": "servico",
+                        "in": "path",
+                        "description": "servico id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "qtd_min": {
+                                        "type": "integer"
+                                    },
+                                    "valor": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Sucesso"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/servicos/{servico}": {
+            "delete": {
+                "tags": [
+                    "/servicos/:servico"
+                ],
+                "summary": "Deleta um Serviço existente",
+                "description": "Deleta o Serviço por Id",
+                "operationId": "App\\Http\\Controllers\\ServicoController::delete",
+                "parameters": [
+                    {
+                        "name": "servico",
+                        "in": "path",
+                        "description": "servico id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Sucesso!",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
+        "/servicos/addFuncionario/{servico}": {
+            "post": {
+                "tags": [
+                    "/servicos/addFuncionario/:servico"
+                ],
+                "summary": "Adiciona funcionario ao servico",
+                "description": "Adiciona funcionario ao servico",
+                "operationId": "App\\Http\\Controllers\\ServicoController::storeFuncionario",
+                "parameters": [
+                    {
+                        "name": "servico",
+                        "in": "path",
+                        "description": "servico id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "funcionario_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        },
+        "/upload": {
+            "post": {
+                "tags": [
+                    "/upload"
+                ],
+                "summary": "Faz Upload de Imagem",
+                "description": "Faz Upload de Imagem",
+                "operationId": "App\\Http\\Controllers\\UploadController::uploadImage",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "image": {
+                                        "type": "file",
+                                        "items": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucesso!"
+                    },
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}
